@@ -46,4 +46,6 @@ docker run --restart=always --network jason --name sing-box -p 80:80 -v /etc/sin
 
 docker run --restart=always --network jason --name nginx -p 443:443 -p 443:443/udp -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:latest
 
-docker run --restart=always --network jason --name accelerator -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -d accelerator
+docker run --restart=always --network jason --name accelerator-v4 -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -d accelerator
+
+docker run --restart=always --network jason --name accelerator-v6 -p 8686:8686 --cap-add NET_ADMIN -e UDP2RAW_ADDRESS=[::] -e UDP2RAW_PORT=8686 -d accelerator
