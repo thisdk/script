@@ -71,3 +71,7 @@ docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/ngin
 docker run --restart=always --network jason --name accelerator-v4 -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -d accelerator
 
 docker run --restart=always --network jason --name accelerator-v6 -p 8686:8686 --cap-add NET_ADMIN -e UDP2RAW_ADDRESS=[::] -e UDP2RAW_PORT=8686 -d accelerator
+
+docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6881:6881/udp -e PUID=1000 -e PGID=1000 -e WEBUI_PORT=8080 -d lscr.io/linuxserver/qbittorrent:latest
+
+docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist:latest
