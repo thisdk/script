@@ -42,8 +42,6 @@ mkdir /etc/docker
 
 wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
 
-pacman -Syyu --noconfirm
-
 pacman -S --noconfirm base-devel docker
 
 systemctl enable --now docker
