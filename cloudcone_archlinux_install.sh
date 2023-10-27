@@ -86,4 +86,4 @@ docker run --restart=always --network jason --name accelerator-v6 -p 8686:8686 -
 
 docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist:latest
 
-docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6881:6881/udp -e PUID=1000 -e PGID=1000 -e WEBUI_PORT=8080 --volumes-from alist -d lscr.io/linuxserver/qbittorrent:latest
+docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6881:6881/udp --volumes-from alist -d qbittorrentofficial/qbittorrent-nox:latest
