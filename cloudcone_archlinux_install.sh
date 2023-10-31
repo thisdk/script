@@ -60,8 +60,6 @@ ping -4 -c 2 www.thisdk.tk && ping -6 -c 2 www.thisdk.tk
 
 ping -4 -c 2 qbit.thisdk.tk && ping -6 -c 2 qbit.thisdk.tk
 
-ping -4 -c 2 2048.thisdk.tk && ping -6 -c 2 2048.thisdk.tk
-
 ping -4 -c 2 alist.thisdk.tk && ping -6 -c 2 alist.thisdk.tk
 
 ping -4 -c 2 docker.thisdk.tk && ping -6 -c 2 docker.thisdk.tk
