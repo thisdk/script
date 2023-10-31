@@ -54,15 +54,15 @@ docker build -f accelerator_docker -t accelerator ./accelerator/
 
 cd .. && rm -rf temp
 
-ping -4 -c 2 hysteria2.thisdk.tk && ping -6 -c 2 hysteria2.thisdk.tk
+ping -c 2 www.thisdk.tk
 
-ping -4 -c 2 www.thisdk.tk && ping -6 -c 2 www.thisdk.tk
+ping -c 2 qbit.thisdk.tk
 
-ping -4 -c 2 qbit.thisdk.tk && ping -6 -c 2 qbit.thisdk.tk
+ping -c 2 alist.thisdk.tk
 
-ping -4 -c 2 alist.thisdk.tk && ping -6 -c 2 alist.thisdk.tk
+ping -c 2 docker.thisdk.tk
 
-ping -4 -c 2 docker.thisdk.tk && ping -6 -c 2 docker.thisdk.tk
+ping -c 2 hysteria2.thisdk.tk
 
 docker network create --driver bridge --ipv6 --subnet fd99::/80 jason
 
