@@ -70,6 +70,10 @@ docker run --restart=always --network jason --name watchtower -v /var/run/docker
 
 docker run --restart=always --network jason --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
 
+docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist-aria2:latest
+
+docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6881:6881/udp -e PUID=0 -e PGID=0 -e UMASK=022 --volumes-from alist -d qbittorrentofficial/qbittorrent-nox:latest
+
 docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
 docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:latest
@@ -77,7 +81,3 @@ docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/ngin
 docker run --restart=always --network jason --name accelerator-v4 -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -d accelerator
 
 docker run --restart=always --network jason --name accelerator-v6 -p 8686:8686 --cap-add NET_ADMIN -e UDP2RAW_ADDRESS=[::] -e UDP2RAW_PORT=8686 -d accelerator
-
-docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist-aria2:latest
-
-docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6881:6881/udp -e PUID=0 -e PGID=0 -e UMASK=022 --volumes-from alist -d qbittorrentofficial/qbittorrent-nox:latest
