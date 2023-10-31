@@ -74,7 +74,7 @@ docker run --restart=always --network jason --name portainer -v /var/run/docker.
 
 docker run --restart=always --network jason --name docker.2048 -d alexwhen/docker-2048:latest
 
-docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
+docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d gzxhwq/sing-box:git
 
 docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:latest
 
