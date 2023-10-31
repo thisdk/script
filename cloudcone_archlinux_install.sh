@@ -56,27 +56,13 @@ cd .. && rm -rf temp
 
 ping -4 -c 2 hysteria2.thisdk.tk && ping -6 -c 2 hysteria2.thisdk.tk
 
-ping -4 -c 2 www.thisdk.tk && ping -6 -c 2 www.thisdk.tk
-
-ping -4 -c 2 qbit.thisdk.tk && ping -6 -c 2 qbit.thisdk.tk
-
-ping -4 -c 2 alist.thisdk.tk && ping -6 -c 2 alist.thisdk.tk
-
-ping -4 -c 2 docker.thisdk.tk && ping -6 -c 2 docker.thisdk.tk
-
 docker network create --driver bridge --ipv6 --subnet fd99::/80 jason
 
 docker run --restart=always --network jason --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup
 
-docker run --restart=always --network jason --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
+docker run --restart=always --network jason --name sing-box-reality -p 443:443/tcp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config-reality.json
 
-docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist-aria2:latest
-
-docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6881:6881/udp -e PUID=0 -e PGID=0 -e UMASK=022 --volumes-from alist -d qbittorrentofficial/qbittorrent-nox:latest
-
-docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
-
-docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:latest
+docker run --restart=always --network jason --name sing-box-hysteria2 -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config-hysteria2.json
 
 docker run --restart=always --network jason --name accelerator-v4 -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -d accelerator
 
