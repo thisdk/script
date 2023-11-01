@@ -60,6 +60,8 @@ ping -c 2 qbit.thisdk.tk
 
 ping -c 2 alist.thisdk.tk
 
+ping -c 2 tools.thisdk.tk
+
 ping -c 2 docker.thisdk.tk
 
 ping -c 2 hysteria2.thisdk.tk
@@ -69,6 +71,8 @@ docker network create --driver bridge --ipv6 --subnet fd99::/80 jason
 docker run --restart=always --network jason --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup
 
 docker run --restart=always --network jason --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
+
+docker run --restart=always --network jason --name tools -d ghcr.io/corentinth/it-tools:latest
 
 docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist-aria2:latest
 
