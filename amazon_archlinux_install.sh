@@ -50,6 +50,8 @@ docker network create --driver bridge jason
 
 docker run --restart=always --network jason --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup
 
+docker run --restart=always --network jason --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
+
 docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
 docker run --restart=always --network jason --name accelerator -p 8383:8383 --cap-add NET_ADMIN -e UDP2RAW_PORT=8383 -e KCPTUN_DS=4 KCPTUN_PS=4 -d accelerator:latest
