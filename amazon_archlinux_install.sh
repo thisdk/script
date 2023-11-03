@@ -52,4 +52,4 @@ docker run --restart=always --network jason --name watchtower -v /var/run/docker
 
 docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
-docker run --restart=always --network jason --name accelerator -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -e KCPTUN_PS=2 -d accelerator
+docker run --restart=always --network jason --name accelerator -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -e KCPTUN_DS=4 KCPTUN_PS=4 -d accelerator
