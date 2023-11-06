@@ -66,7 +66,7 @@ ping -c 2 docker.thisdk.tk
 
 ping -c 2 hysteria2.thisdk.tk
 
-docker network create --driver bridge --ipv6 --subnet fd99::/80 jason
+docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
 
 docker run --restart=always --network jason --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup
 
