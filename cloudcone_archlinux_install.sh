@@ -46,14 +46,6 @@ pacman -S --noconfirm base-devel docker unzip
 
 systemctl enable --now docker
 
-mkdir temp && cd temp && mkdir accelerator
-
-wget -O accelerator_docker https://raw.githubusercontent.com/thisdk/accelerator/main/accelerator
-
-docker build -f accelerator_docker -t accelerator ./accelerator/
-
-cd .. && rm -rf temp
-
 ping -c 2 www.thisdk.tk
 
 ping -c 2 qbit.thisdk.tk
@@ -81,7 +73,3 @@ docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6
 docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
 docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:latest
-
-docker run --restart=always --network jason --name accelerator-v4 -p 8585:8585 --cap-add NET_ADMIN -e UDP2RAW_PORT=8585 -d accelerator:latest
-
-docker run --restart=always --network jason --name accelerator-v6 -p 8686:8686 --cap-add NET_ADMIN -e UDP2RAW_ADDRESS=[::] -e UDP2RAW_PORT=8686 -d accelerator:latest
