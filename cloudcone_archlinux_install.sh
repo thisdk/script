@@ -68,7 +68,7 @@ docker run --restart=always --network jason --name tools -d ghcr.io/corentinth/i
 
 docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist-aria2:latest
 
-docker run --restart=always --network jason --name qbittorrent -p 6881:6881 -p 6881:6881/udp -v /etc/qbittorrent:/config --volumes-from alist -e PUID=0 -e PGID=0 -e UMASK=022 -d qbittorrentofficial/qbittorrent-nox:latest
+docker run --restart=always --network jason --name qbittorrent -p 53866:53866 -p 53866:53866/udp -v /etc/qbittorrent:/config --volumes-from alist -e PUID=0 -e PGID=0 -e UMASK=022 -d qbittorrentofficial/qbittorrent-nox:latest
 
 docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
