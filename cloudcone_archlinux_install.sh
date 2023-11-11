@@ -60,7 +60,7 @@ ping -c 2 hysteria2.thisdk.tk
 
 docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
 
-docker run --restart=always --network jason --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup --interval 1800
+docker run --restart=always --network jason --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup --interval 3600
 
 docker run --restart=always --network jason --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
 
