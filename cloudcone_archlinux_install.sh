@@ -84,5 +84,5 @@ docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/
 
 docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:latest
 
-docker run --restart=always --network host --name accelerator -e KCPTUBE_PORT_START=55000 -e KCPTUBE_PORT_END=65000 -d accelerator:latest
+docker run --restart=always --network jason --name accelerator -p 8585:8585/udp -e KCPTUBE_PORT=8585 -d accelerator:latest
 
