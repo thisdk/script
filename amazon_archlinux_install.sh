@@ -12,19 +12,21 @@ echo "net.core.default_qdisc=fq_codel" >> /etc/sysctl.d/80-bbr.conf
 
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.d/30-ipforward.conf
 
-echo "net.core.rmem_default = 1048576" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.core.somaxconn = 8192" >> /etc/sysctl.d/99-sysctl.conf
 
-echo "net.core.rmem_max = 16777216" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.core.rmem_default = 2097152" >> /etc/sysctl.d/99-sysctl.conf
 
-echo "net.core.wmem_default = 1048576" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.core.rmem_max = 33554432" >> /etc/sysctl.d/99-sysctl.conf
 
-echo "net.core.wmem_max = 16777216" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.core.wmem_default = 2097152" >> /etc/sysctl.d/99-sysctl.conf
+
+echo "net.core.wmem_max = 33554432" >> /etc/sysctl.d/99-sysctl.conf
 
 echo "net.core.optmem_max = 65536" >> /etc/sysctl.d/99-sysctl.conf
 
-echo "net.ipv4.tcp_rmem = 4096 1048576 2097152" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.ipv4.tcp_rmem = 4096 1048576 4194304" >> /etc/sysctl.d/99-sysctl.conf
 
-echo "net.ipv4.tcp_wmem = 4096 65536 16777216" >> /etc/sysctl.d/99-sysctl.conf
+echo "net.ipv4.tcp_wmem = 4096 65536 33554432" >> /etc/sysctl.d/99-sysctl.conf
 
 echo "net.ipv4.udp_rmem_min = 8192" >> /etc/sysctl.d/99-sysctl.conf
 
