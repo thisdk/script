@@ -38,12 +38,3 @@ pacman -S --noconfirm docker
 
 systemctl enable --now docker
 
-mkdir temp && cd temp && mkdir accelerator
-
-wget -O accelerator_docker https://raw.githubusercontent.com/thisdk/accelerator/main/accelerator
-
-docker build -f accelerator_docker -t accelerator ./accelerator/
-
-cd .. && rm -rf temp
-
-docker run --restart=always --network host --name accelerator -e KCPTUBE_PORT_START=55000 -e KCPTUBE_PORT_END=65000 -d accelerator:latest
