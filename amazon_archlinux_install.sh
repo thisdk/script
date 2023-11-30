@@ -8,7 +8,7 @@ echo "tcp_bbr" > /etc/modules-load.d/80-bbr.conf
 
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.d/80-bbr.conf
 
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.d/80-bbr.conf
+echo "net.core.default_qdisc=fq_codel" >> /etc/sysctl.d/80-bbr.conf
 
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.d/30-ipforward.conf
 
