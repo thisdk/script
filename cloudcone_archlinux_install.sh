@@ -40,6 +40,12 @@ echo "net.ipv4.tcp_fastopen = 3" >> /etc/sysctl.d/99-sysctl.conf
 
 echo "net.core.netdev_max_backlog = 16384" >> /etc/sysctl.d/99-sysctl.conf
 
+timedatectl set-ntp true
+
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+hwclock --systohc
+
 mkdir /etc/docker
 
 wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
@@ -48,41 +54,10 @@ pacman -S --noconfirm base-devel docker unzip
 
 systemctl enable --now docker
 
-mkdir temp && cd temp && mkdir accelerator
-
-wget -O accelerator_docker https://raw.githubusercontent.com/thisdk/accelerator/main/accelerator
-
-docker build -f accelerator_docker -t accelerator ./accelerator/
-
-cd .. && rm -rf temp
-
-ping -c 2 www.thisdk.tk
-
-ping -c 2 qbit.thisdk.tk
-
-ping -c 2 alist.thisdk.tk
-
-ping -c 2 tools.thisdk.tk
-
-ping -c 2 docker.thisdk.tk
-
-ping -c 2 hysteria2.thisdk.tk
-
 docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
 
 docker run --restart=always --network jason --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup --interval 21600
 
-docker run --restart=always --network jason --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
-
-docker run --restart=always --network jason --name tools -d ghcr.io/corentinth/it-tools:latest
-
-docker run --restart=always --network jason --name alist -v /etc/alist:/opt/alist/data -e PUID=0 -e PGID=0 -e UMASK=022 -d xhofe/alist-aria2:latest
-
-docker run --restart=always --network jason --name qbittorrent -p 53866:53866 -p 53866:53866/udp -v /etc/qbittorrent:/config --volumes-from alist -e PUID=0 -e PGID=0 -e UMASK=022 -d qbittorrentofficial/qbittorrent-nox:latest
-
 docker run --restart=always --network jason --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
 docker run --restart=always --network jason --name nginx -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:latest
-
-docker run --restart=always --network jason --name accelerator -p 8585:8585/udp -e KCPTUBE_PORT=8585 -d accelerator:latest
-
