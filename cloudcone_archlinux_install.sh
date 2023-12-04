@@ -61,3 +61,8 @@ docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtowe
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name nginx -p 443:443/tcp -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:alpine
+
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=wireguard --cap-add=NET_ADMIN --cap-add=SYS_MODULE \
+  -e PUID=1000 -e PGID=1000 -e SERVERURL=148.135.96.144 -e SERVERPORT=51820 -e PEERS=1 -e PEERDNS=auto -e INTERNAL_SUBNET=10.18.88.0 \
+  -e PERSISTENTKEEPALIVE_PEERS=25 -e LOG_CONFS=true -v /etc/wireguard/config:/config -v /lib/modules:/lib/modules \
+  -d lscr.io/linuxserver/wireguard:latest
