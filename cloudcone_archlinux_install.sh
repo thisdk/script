@@ -40,19 +40,11 @@ echo "net.core.optmem_max = 65536" >> /etc/sysctl.d/99-sysctl.conf
 
 echo "net.core.netdev_max_backlog = 16384" >> /etc/sysctl.d/99-sysctl.conf
 
-timedatectl set-ntp true
+timedatectl set-ntp true && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && hwclock --systohc
 
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+mkdir /etc/docker && wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
 
-hwclock --systohc
-
-mkdir /etc/docker
-
-wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
-
-pacman -S --noconfirm base-devel docker unzip
-
-systemctl enable --now docker
+pacman -S --noconfirm base-devel docker unzip && systemctl enable --now docker
 
 docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
 
