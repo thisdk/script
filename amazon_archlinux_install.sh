@@ -36,18 +36,16 @@ echo "net.core.optmem_max = 65536" >> /etc/sysctl.d/99-sysctl.conf
 
 echo "net.core.netdev_max_backlog = 16384" >> /etc/sysctl.d/99-sysctl.conf
 
-timedatectl set-ntp true
+timedatectl set-ntp true && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && hwclock --systohc
 
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+mkdir /etc/docker && wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
 
-hwclock --systohc
-
-mkdir /etc/docker
-
-wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
-
-pacman -S --noconfirm base-devel docker unzip
-
-systemctl enable --now docker
+pacman -S --noconfirm base-devel docker unzip && systemctl enable --now docker
 
 docker network create --driver bridge jason
+
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup --interval 21600
+
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
+
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name nginx -p 443:443/tcp -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:alpine
