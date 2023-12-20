@@ -38,18 +38,26 @@ echo "net.core.netdev_max_backlog = 16384" >> /etc/sysctl.d/99-sysctl.conf
 
 timedatectl set-ntp true && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && hwclock --systohc
 
-mkdir /etc/docker && wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
+openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/cert/www.berkeley.edu.key
 
-openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/cert/private.key
+openssl req -new -x509 -days 365 -key /etc/sing-box/cert/www.berkeley.edu.key -out /etc/sing-box/cert/www.berkeley.edu.pem -subj "/C=US/ST=California/L=Berkeley/O=University of California/OU=www/CN=www.berkeley.edu"
 
-openssl req -new -x509 -days 3650 -key /etc/sing-box/cert/private.key -out /etc/sing-box/cert/cert.pem -subj "/C=US/ST=California/L=Berkeley/O=University of California/OU=www/CN=www.berkeley.edu"
+openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/cert/docker.thisdk.io.key
 
-pacman -S --noconfirm base-devel docker unzip && systemctl enable --now docker
+openssl req -new -x509 -days 365 -key /etc/sing-box/cert/docker.thisdk.io.key -out /etc/sing-box/cert/docker.thisdk.io.pem -subj "/C=US/ST=California/OU=docker/CN=docker.thisdk.io"
+
+pacman -S --noconfirm base-devel docker && systemctl enable --now docker
 
 docker network create --driver bridge jason
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup --interval 21600
 
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
+
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest run -c /etc/sing-box/config.json
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name nginx -p 443:443/tcp -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:alpine
+
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=wireguard --cap-add=NET_ADMIN --cap-add=SYS_MODULE -e PUID=1000 -e PGID=1000 -e SERVERURL=148.135.96.144 -e SERVERPORT=51820 -e PEERS=1 -e PEERDNS=auto -e INTERNAL_SUBNET=10.18.88.0 -e PERSISTENTKEEPALIVE_PEERS=25 -e LOG_CONFS=true -v /etc/wireguard/config:/config -v /lib/modules:/lib/modules -d ghcr.io/linuxserver/wireguard:latest
+ 
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=kcptube -p 58535-58585:58535-58585/udp -v /etc/kcptube:/etc/kcptube -d ghcr.io/thisdk/kcptube:latest /etc/kcptube/config.conf
