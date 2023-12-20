@@ -52,7 +52,7 @@ openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/cert/docker.thisdk.i
 
 openssl req -new -x509 -days 365 -key /etc/sing-box/cert/docker.thisdk.io.key -out /etc/sing-box/cert/docker.thisdk.io.pem -subj "/C=US/ST=California/OU=docker/CN=docker.thisdk.io"
 
-pacman -S --noconfirm base-devel docker unzip && systemctl enable --now docker
+pacman -S --noconfirm base-devel docker && systemctl enable --now docker
 
 docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
 
