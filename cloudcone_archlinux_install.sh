@@ -1,6 +1,6 @@
 #!/bin/bash
 
-hostnamectl set-hostname archlinux
+hostnamectl set-hostname arch
 
 modprobe tcp_bbr
 
