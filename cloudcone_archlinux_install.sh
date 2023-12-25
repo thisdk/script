@@ -44,14 +44,6 @@ timedatectl set-ntp true && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localt
 
 mkdir /etc/docker && wget https://raw.githubusercontent.com/thisdk/script/main/daemon.json -O /etc/docker/daemon.json
 
-openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/cert/www.berkeley.edu.key
-
-openssl req -new -x509 -days 365 -key /etc/sing-box/cert/www.berkeley.edu.key -out /etc/sing-box/cert/www.berkeley.edu.crt -subj "/C=US/ST=California/L=Berkeley/O=University of California/OU=www/CN=www.berkeley.edu"
-
-openssl ecparam -genkey -name prime256v1 -out /etc/sing-box/cert/docker.thisdk.io.key
-
-openssl req -new -x509 -days 365 -key /etc/sing-box/cert/docker.thisdk.io.key -out /etc/sing-box/cert/docker.thisdk.io.crt -subj "/C=US/ST=California/OU=www/CN=docker.thisdk.io"
-
 pacman -S --noconfirm base-devel docker && systemctl enable --now docker
 
 docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
