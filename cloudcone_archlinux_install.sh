@@ -56,7 +56,9 @@ docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtowe
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
 
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest -D /var/lib/sing-box -C /etc/sing-box/ run
+# docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest -D /var/lib/sing-box -C /etc/sing-box/ run
+
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d gzxhwq/sing-box:git
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name nginx -p 443:443/tcp -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:alpine
 
