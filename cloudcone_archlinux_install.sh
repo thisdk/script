@@ -62,4 +62,4 @@ docker run --restart=always --network jason -e TZ=Asia/Shanghai --name nginx -p 
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=wireguard --cap-add=NET_ADMIN --cap-add=SYS_MODULE -e PUID=1000 -e PGID=1000 -e SERVERURL=148.135.85.46 -e SERVERPORT=51820 -e PEERS=1 -e PEERDNS=auto -e INTERNAL_SUBNET=10.18.88.0 -e PERSISTENTKEEPALIVE_PEERS=25 -e LOG_CONFS=true -v /etc/wireguard/config:/config -v /lib/modules:/lib/modules -d ghcr.io/linuxserver/wireguard:latest
  
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=kcptube -p 8585:8585/udp -v /etc/kcptube:/etc/kcptube -d ghcr.io/thisdk/kcptube:latest /etc/kcptube/config.conf
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=kcptube -v /etc/kcptube:/etc/kcptube -d ghcr.io/thisdk/kcptube:latest /etc/kcptube/config.conf
