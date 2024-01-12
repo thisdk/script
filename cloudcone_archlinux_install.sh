@@ -46,7 +46,7 @@ mkdir /etc/docker && wget https://raw.githubusercontent.com/thisdk/script/main/d
 
 pacman -S --noconfirm base-devel docker && systemctl enable --now docker
 
-docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
+docker network create --driver bridge --ipv6 --subnet fd88::/80 jason
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup --interval 21600
 
