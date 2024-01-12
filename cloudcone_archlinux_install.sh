@@ -58,6 +58,7 @@ docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box 
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name nginx -p 443:443/tcp -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:alpine
 
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=wireguard --cap-add=NET_ADMIN --cap-add=SYS_MODULE -e PUID=1000 -e PGID=1000 -e SERVERPORT=51820 -e PEERS=1 -e PEERDNS=auto -e INTERNAL_SUBNET=10.18.88.0 -e PERSISTENTKEEPALIVE_PEERS=25 -e LOG_CONFS=true -v /etc/wireguard/config:/config -v /lib/modules:/lib/modules -d ghcr.io/linuxserver/wireguard:latest
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=wireguard --cap-add=NET_ADMIN --cap-add=SYS_MODULE -v /etc/wireguard/config:/config -v /lib/modules:/lib/modules -e PUID=1000 -e PGID=1000 -e SERVERPORT=51820 -e PEERS=1 -e PEERDNS=auto -e INTERNAL_SUBNET=10.18.88.0 -e PERSISTENTKEEPALIVE_PEERS=25 -e LOG_CONFS=true -d ghcr.io/linuxserver/wireguard:latest
  
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=kcptube -p 8585:8585/udp -v /etc/kcptube:/etc/kcptube -d ghcr.io/thisdk/kcptube:latest /etc/kcptube/config.conf
+
