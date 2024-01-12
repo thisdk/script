@@ -48,10 +48,6 @@ pacman -S --noconfirm base-devel docker && systemctl enable --now docker
 
 docker network create --driver bridge --ipv6 --subnet fd86::/80 jason
 
-ping -c 2 thisdk.cloudns.biz
-
-ping -c 2 hysteria2.thisdk.cloudns.biz
-
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d containrrr/watchtower:latest --cleanup --interval 21600
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
