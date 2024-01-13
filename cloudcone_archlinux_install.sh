@@ -52,7 +52,7 @@ docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtowe
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
 
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name vaultwarden -p 3012:3012 -v vaultwarden_data:/data -e SIGNUPS_ALLOWED=false -e INVITATIONS_ALLOWED=false -e WEBSOCKET_ENABLED=true -e ADMIN_TOKEN='$argon2id$v=19$m=65540,t=3,p=4$Wv/oKINnp3hEzzP2ic+3DNTxapoQhPiAQXS5hJmzFac$/DrKy4XoYl0QG2Z50Lfe/fIAuoZOlLOBWMmuYxIR5aM' -d vaultwarden/server:alpine
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name vaultwarden -p 3012:3012 -v vaultwarden_data:/data -e SIGNUPS_ALLOWED=false -e INVITATIONS_ALLOWED=false -e WEBSOCKET_ENABLED=true -e ADMIN_TOKEN='$argon2id$v=19$m=65540,t=3,p=4$Wv/oKINnp3hEzzP2ic+3DNTxapoQhPiAQXS5hJmzFac$/DrKy4XoYl0QG2Z50Lfe/fIAuoZOlLOBWMmuYxIR5aM' -d ghcr.io/dani-garcia/vaultwarden:alpine
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box -p 80:80 -p 443:443/udp -v /etc/sing-box:/etc/sing-box -d ghcr.io/sagernet/sing-box:latest -D /var/lib/sing-box -C /etc/sing-box/ run
 
