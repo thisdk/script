@@ -62,4 +62,4 @@ docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=wireguard
  
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=kcptube -p 8585:8585/udp -v /etc/kcptube:/etc/kcptube -d ghcr.io/thisdk/kcptube:latest /etc/kcptube/config.conf
 
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=accelerator --cap-add NET_RAW --cap-add NET_ADMIN -p 8383:8383 -e UDP2RAW_PORT=8383 -d ghcr.io/thisdk/accelerator:latest
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name=accelerator --cap-add NET_ADMIN -p 8383:8383 -e UDP2RAW_PORT=8383 -d ghcr.io/thisdk/accelerator:latest
