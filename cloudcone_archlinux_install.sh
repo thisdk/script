@@ -48,7 +48,7 @@ pacman -S --noconfirm base-devel docker && systemctl enable --now docker
 
 docker network create --driver bridge --ipv6 --subnet fd88::/80 jason
 
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d ghcr.io/containrrr/watchtower:latest --cleanup --interval 21600
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -d ghcr.io/containrrr/watchtower:latest --cleanup -s "0 0 5 * * *"
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -d portainer/portainer-ce:latest
 
