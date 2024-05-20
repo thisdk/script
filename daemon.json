@@ -1,6 +1,6 @@
 {
     "ipv6": true,
-    "fixed-cidr-v6": "2001:3866:2::/64",
+    "fixed-cidr-v6": "fd80::/48",
     "ip6tables": true,
     "experimental": true
 }
