@@ -58,8 +58,8 @@ docker run --restart=always --network jason -e TZ=Asia/Shanghai --name sing-box 
 
 docker run --restart=always --network jason -e TZ=Asia/Shanghai --name nginx -p 443:443/tcp -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx:alpine
 
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name wireguard --cap-add=NET_ADMIN --cap-add=SYS_MODULE -v /etc/wireguard/config:/config -v /lib/modules:/lib/modules -e PUID=1000 -e PGID=1000 -e SERVERPORT=51820 -e PEERS=3 -e PEERDNS=auto -e INTERNAL_SUBNET=10.18.88.0 -e PERSISTENTKEEPALIVE_PEERS=25 -e LOG_CONFS=true -d ghcr.io/linuxserver/wireguard:latest
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name wireguard --cap-add=NET_ADMIN --cap-add=SYS_MODULE -v /etc/wireguard/config:/config -v /lib/modules:/lib/modules -e PUID=1000 -e PGID=1000 -e SERVERPORT=51820 -e PEERS=1 -e PEERDNS=auto -e INTERNAL_SUBNET=10.18.88.0 -e PERSISTENTKEEPALIVE_PEERS=25 -e LOG_CONFS=true -d ghcr.io/linuxserver/wireguard:latest
 
-docker run --restart=always --network jason -e TZ=Asia/Shanghai --name accelerator --cap-add NET_ADMIN -p 8585:8585 -e UDP2RAW_PORT=8585 -e UDP_FEC=2:6 -d ghcr.io/thisdk/accelerator:latest
+docker run --restart=always --network jason -e TZ=Asia/Shanghai --name accelerator -p 8585:8585 -e TCN=wireguard -e TCP=51820 -e FEC=1:1,2:2,8:6,20:10 --cap-add NET_ADMIN -d ghcr.io/thisdk/accelerator:latest
 
-docker run --restart=always --network jason -e TZ=America/Los_Angeles --name ntp -p 123:123/udp -e NTP_SERVERS=clock.fmt.he.net,clock.sjc.he.net,ntp.drydog.com,ntp.nblug.org,ntp.feldbaum.com -d dockurr/chrony:latest
+
